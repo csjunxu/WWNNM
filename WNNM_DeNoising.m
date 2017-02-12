@@ -1,4 +1,4 @@
-function [E_Img]   =  WWNNM_DeNoising( N_Img, O_Img, Par )
+function [E_Img]   =  WNNM_DeNoising( N_Img, O_Img, Par )
 
 
 E_Img           = N_Img;                                                        % Estimated Image
@@ -26,7 +26,7 @@ for iter = 1 : Par.Iter
         end
     end
     
-    [EPat, W]  =  WPatEstimation( NL_mat, Self_arr, Sigma_arr, CurPat, Par );   % Estimate all the patches
+    [EPat, W]  =  PatEstimation( NL_mat, Self_arr, Sigma_arr, CurPat, Par );   % Estimate all the patches
     E_Img      =  Patch2Im( EPat, W, Par.patsize, Height, Width );
     PSNR  = csnr( O_Img, E_Img, 0, 0 );
     fprintf( 'Iter = %2.3f, PSNR = %2.2f \n', iter, PSNR );

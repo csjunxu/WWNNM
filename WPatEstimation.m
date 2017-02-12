@@ -1,4 +1,4 @@
-function [ EPat, W ] = PatEstimation( NL_mat, Self_arr, Sigma_arr, CurPat, Par )
+function [ EPat, W ] = WPatEstimation( NL_mat, Self_arr, Sigma_arr, CurPat, Par )
 
 EPat = zeros(size(CurPat));
 W    = zeros(size(CurPat));
@@ -7,7 +7,7 @@ for  i      =  1 : length(Self_arr)                                 % For each k
     M_Temp  =   repmat(mean( Temp, 2 ),1,Par.patnum);
     Temp    =   Temp-M_Temp;
     
-    E_Temp 	=   WNNM( Temp, Par.lambdac*Par.c, Sigma_arr(Self_arr(i)), M_Temp, Par.ReWeiIter); % WNNM Estimation
+    E_Temp 	=   WWNNM( Temp, Par.lambdac*Par.c, Sigma_arr(NL_mat(:, i)), M_Temp, Par.ReWeiIter); % WWNNM Estimation
     EPat(:,NL_mat(1:Par.patnum,i))  = EPat(:,NL_mat(1:Par.patnum,i))+E_Temp;
     W(:,NL_mat(1:Par.patnum,i))     = W(:,NL_mat(1:Par.patnum,i))+ones(Par.patsize*Par.patsize,size(NL_mat(1:Par.patnum,i),1));
 end

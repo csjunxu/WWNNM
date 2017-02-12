@@ -35,11 +35,11 @@ else
 end
 Par.step      =   floor((Par.patsize)/2-1);
 
-for delta = [0.1 0.08 0.06 0]
+for delta = 0.1
     Par.delta = delta;
-    for lambdac = 1:-0.05:0.5
+    for lambdac = 1
         Par.lambdac = lambdac;
-        for lamada = 0.56:0.02:0.6
+        for lamada = 0.56
             Par.lamada = lamada;
             % record all the results in each iteration
             Par.PSNR = zeros(Par.Iter, im_num, 'single');
@@ -60,7 +60,7 @@ for delta = [0.1 0.08 0.06 0]
                 fprintf('The initial value of PSNR = %2.4f, SSIM = %2.4f \n', PSNR,SSIM);
                 %
                 time0 = clock;
-                im_out = WWNNM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
+                im_out = WNNM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
                 if size(Par.I,1) == 512
                     T512 = [T512 etime(clock,time0)];
                     fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );
@@ -88,7 +88,7 @@ for delta = [0.1 0.08 0.06 0]
             sT256 = std(T256);
             fprintf('The best PSNR result is at %d iteration. \n',idx);
             fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-            name = sprintf(['WWNNM_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
+            name = sprintf(['WNNM_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
             save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
         end
     end

@@ -17,7 +17,6 @@ Par.ReWeiIter =   3;
 Par.patsize       =   7;
 Par.patnum        =   90;
 Par.Iter          =   12;
-% Par.lamada        =   0.56;
 
 Par.step      =   floor((Par.patsize)/2-1);
 

@@ -15,10 +15,7 @@ Par.Innerloop =   2;                                    % InnerLoop Num of betwe
 Par.patsize       =   7;
 Par.patnum        =   90;
 Par.Iter          =   8;
-
 Par.step      =   floor((Par.patsize)/2-1);
-
-Par.maxiter = 100;
 
 for delta = [0.1 0.08 0.06 0]
     Par.delta = delta;

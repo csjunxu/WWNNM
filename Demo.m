@@ -1,4 +1,4 @@
-clear;
+  clear;
 Original_image_dir  =    'C:\Users\csjunxu\Desktop\PGPD_TIP\20images\';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
@@ -46,6 +46,8 @@ for delta = [0.1 0.08 0.06 0]
                 %
                 time0 = clock;
                 im_out = WWNNM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
+%                 im_out = FLRAD_DeNoising( Par.nim, Par.I, Par );         % RNNM  
+%                 im_out = FLRAD_DeNoising( Par.nim, Par.I, Par );
                 if size(Par.I,1) == 512
                     T512 = [T512 etime(clock,time0)];
                     fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );
@@ -78,3 +80,23 @@ for delta = [0.1 0.08 0.06 0]
         end
     end
 end
+    path(path,'./image')
+    for nSig = [75]
+        for timg = [ 1 5 7 10 11 14]
+            
+            O_Img =load_test_image(timg);  
+
+            randn('seed', 0);
+            N_Img = O_Img + nSig* randn(size(O_Img));                                   %Generate noisy image
+            PSNR  =  csnr( N_Img, O_Img, 0, 0 );
+            fprintf( 'Noisy Image: Number = %2.0f, nSig = %2.3f, PSNR = %2.2f \n\n\n',timg, nSig, PSNR );
+    
+            Par   = ParSet(nSig);   
+            E_Img = FLRAD_DeNoising( N_Img, O_Img, Par );                                %WNNM denoisng function
+            PSNR  = csnr( O_Img, E_Img, 0, 0 );
+    
+            fprintf( 'Estimated Image: nSig = %2.3f, PSNR = %2.2f \n\n\n', nSig, PSNR );
+            imshow(uint8(E_Img));
+            imwrite(E_Img/255,['.\denoised_image\LRAD_image' num2str(timg) '_nSig' num2str(nSig) '.tif'])
+        end
+    end

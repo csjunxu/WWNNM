@@ -26,5 +26,5 @@ for  i  =  1 : L
     mark = (val<T);
     ind = mark.*max+min;
     ind1 = find(ind);
-    Init_Index(1:length(ind1),i)=Neighbor_arr(index(ind1),i); %每一列中存储该参考块的相似块下标
+    Init_Index(:,i)=Neighbor_arr(index(ind1),i); %每一列中存储该参考块的相似块下标
 end

@@ -32,8 +32,8 @@ for iter = 1 : Par.Iter
     PSNR =   csnr( E_Img, O_Img, 0, 0 );
     SSIM      =  cal_ssim( E_Img, O_Img, 0, 0 );
     fprintf('Iter %d : PSNR = %2.4f, SSIM = %2.4f\n', iter, PSNR, SSIM);
-    par.PSNR(iter, par.image) = PSNR;
-    par.SSIM(iter, par.image) = SSIM;
+    Par.PSNR(iter, Par.image) = PSNR;
+    Par.SSIM(iter, Par.image) = SSIM;
 end
 return;
 

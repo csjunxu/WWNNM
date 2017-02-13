@@ -19,7 +19,7 @@ Par.patnum        =   90;
 Par.Iter          =   12;
 
 Par.step      =   floor((Par.patsize)/2-1);
-
+Par.k = Par.patsize^2;
 for delta = [0.1 0.08 0.06 0]
     Par.delta = delta;
     for lambdac = [1 1.05 0.95 1.1 0.9]

@@ -1,6 +1,4 @@
 function  [Init_Index]  =  Block_Matching(X, par,Neighbor_arr,Num_arr, SelfIndex_arr)
-% Jia Xixi said, firstly do dimensional reduction and then do NSS
-% searching, WNNM would have better performance
 L         =   length(Num_arr);
 Init_Index   =  zeros(par.patnum,L);
 

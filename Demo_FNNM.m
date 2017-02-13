@@ -5,26 +5,28 @@ im_dir  = dir(fpath);
 im_num = length(im_dir);
 
 nSig = 40;
-
+%                 Par   = ParSet(nSig);
 Par.nSig      =   nSig;                                 % Variance of the noise image
 Par.SearchWin =   30;                                   % Non-local patch searching window
 Par.delta     =   0.1;                                  % Parameter between each iter
 Par.c         =   2*sqrt(2);                            % Constant num for the weight vector
 Par.Innerloop =   2;                                    % InnerLoop Num of between re-blockmatching
-Par.ReWeiIter =   3;
-
 
 Par.patsize       =   7;
 Par.patnum        =   90;
-Par.Iter          =   12;
+Par.Iter          =   8;
 
 Par.step      =   floor((Par.patsize)/2-1);
-Par.k = Par.patsize^2;
+
+Par.maxiter = 100;
+
+Par.k = Par.patsize^2/2;
+
 for delta = [0.1 0.08 0.06 0]
     Par.delta = delta;
     for lambdac = [1 1.05 0.95 1.1 0.9]
         Par.lambdac = lambdac;
-        for lamada = 0.56:0.02:0.6
+        for lamada = 0.55:0.05:0.8
             Par.lamada = lamada;
             % record all the results in each iteration
             Par.PSNR = zeros(Par.Iter, im_num, 'single');
@@ -44,9 +46,8 @@ for delta = [0.1 0.08 0.06 0]
                 SSIM      =  cal_ssim( Par.nim, Par.I, 0, 0 );
                 fprintf('The initial value of PSNR = %2.4f, SSIM = %2.4f \n', PSNR,SSIM);
                 %
-                Par   = ParSet(nSig);
                 time0 = clock;
-                im_out = FLRAD_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
+                im_out = FNNM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
                 if size(Par.I,1) == 512
                     T512 = [T512 etime(clock,time0)];
                     fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );
@@ -74,7 +75,7 @@ for delta = [0.1 0.08 0.06 0]
             sT256 = std(T256);
             fprintf('The best PSNR result is at %d iteration. \n',idx);
             fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-            name = sprintf(['FLRAD_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
+            name = sprintf(['FNNM_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
             save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
         end
     end

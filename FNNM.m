@@ -6,18 +6,18 @@ function X = FNNM( Y, NSig, m, Par )
 % warning('off');
 %% initialization
 [row, col] = size(Y);
-D = randn(row,k);
-tempU = zeros(size(D));
-A = randn(k,col);
-tempVT = zeros(size(A));
+U = randn(row, Par.rank);
+tempU = zeros(size(U));
+VT = randn(Par.rank, col);
+tempVT = zeros(size(VT));
 maxiter = 6;
 OMG = 1.75;
 epsl = 1e-5;
 
-seta = mean(mean(Y.^2,1));
+seta = mean(mean(Y.^2, 1));
 lambda = Par.lambdac * Par.c * NSig^2 / sqrt(seta) + epsl;
-lambda1 = lambda*col/k;
-lambda2 = lambda*row/k;
+lambda1 = lambda * col / Par.rank;
+lambda2 = lambda * row / Par.rank;
 
 %% Alternate Direction Optimization
 f_curr = 0;
@@ -37,7 +37,7 @@ for i = 1:maxiter
     %     DT = DT(:)'*DT(:);
     RT = lambda1 * norm(U, 'fro') ^ 2 + lambda2 * norm(VT, 'fro') ^ 2;
     f_curr = DT + RT;
-    fprintf('FNNM Energy, %d th: %2.8f\n', i, f_curr);
+%     fprintf('FNNM Energy, %d th: %2.8f\n', i, f_curr);
     if (abs(f_prev - f_curr) / f_curr < 0.001)
         break;
     end

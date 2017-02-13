@@ -44,6 +44,7 @@ for delta = [0.1 0.08 0.06 0]
                 SSIM      =  cal_ssim( Par.nim, Par.I, 0, 0 );
                 fprintf('The initial value of PSNR = %2.4f, SSIM = %2.4f \n', PSNR,SSIM);
                 %
+                Par   = ParSet(nSig);
                 time0 = clock;
                 im_out = FLRAD_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
                 if size(Par.I,1) == 512
@@ -73,7 +74,7 @@ for delta = [0.1 0.08 0.06 0]
             sT256 = std(T256);
             fprintf('The best PSNR result is at %d iteration. \n',idx);
             fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-            name = sprintf(['WWNNM_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
+            name = sprintf(['FLRAD_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
             save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
         end
     end

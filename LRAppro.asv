@@ -6,9 +6,10 @@ function [X ] = LRAppro( Y,sigma,M_Temp,c,k )
 
 %% initialization
 [row, col] = size(Y);
-[D,S,A] = svd(Y,'econ');
+[D, S, A] = svd(Y,'econ');
 D = D(:,1:k);
-A = A(1:k,:);
+AT = A';
+A = AT(1:k,:);
 tempD = zeros(size(D));
 tempA = zeros(size(A));
 maxiter = 50;
@@ -35,8 +36,8 @@ for i = 1:maxiter
     D = tempD;
     if max(t1,t2)<epsl
         i
-        break;
-    end
+%         break;
+%     end
 
 end
 

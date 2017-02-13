@@ -30,6 +30,12 @@ for iter = 1 : Par.Iter
     E_Img      =  Patch2Im( EPat, W, Par.patsize, Height, Width );
     PSNR  = csnr( O_Img, E_Img, 0, 0 );
     fprintf( 'Iter = %2.3f, PSNR = %2.2f \n', iter, PSNR );
+        % calculate the PSNR and SSIM
+    PSNR =   csnr( E_Img, O_Img, 0, 0 );
+    SSIM      =  cal_ssim( E_Img, O_Img, 0, 0 );
+    fprintf('Iter %d : PSNR = %2.4f, SSIM = %2.4f\n', ite, PSNR, SSIM);
+    par.PSNR(iter, par.image) = PSNR;
+    par.SSIM(iter, par.image) = SSIM;
 end
 return;
 

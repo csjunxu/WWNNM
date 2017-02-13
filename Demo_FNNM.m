@@ -55,7 +55,7 @@ for delta = [0.1 0.08 0.06 0]
                         T256 = [T256 etime(clock,time0)];
                         fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );
                     end
-                    im_out(im_out>1)=1;
+                    im_out(im_out>255)=255;
                     im_out(im_out<0)=0;
                     % calculate the PSNR
                     Par.PSNR(Par.Iter, Par.image)  =   csnr( im_out, Par.I, 0, 0 );

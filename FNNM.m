@@ -5,28 +5,38 @@ function X = FNNM( Y, NSig, m, Par )
 %      1/2||Y-UV'||_F_2 + lambda/2(||U||_F_2 + ||V'||_F_2)
 % warning('off');
 %% initialization
-[U, ~, ~] = svd(full(Y),'econ');
-U = U(:,1:Par.rank);
-% V = V(1:Par.rank,:);
-epsl = 1e-6;
+[row, col] = size(Y);
+D = randn(row,k);
+tempU = zeros(size(D));
+A = randn(k,col);
+tempVT = zeros(size(A));
+maxiter = 6;
+OMG = 1.75;
+epsl = 1e-5;
 
 seta = mean(mean(Y.^2,1));
 lambda = Par.lambdac * Par.c * NSig^2 / sqrt(seta) + epsl;
+lambda1 = lambda*col/k;
+lambda2 = lambda*row/k;
 
 %% Alternate Direction Optimization
 f_curr = 0;
-for i = 1:Par.maxiter
+for i = 1:maxiter
     f_prev = f_curr;
     
     % Fix U and update V
-    VT = (U' * U + lambda * eye(Par.rank)) \ (U' * Y);
+    VT = (U' * U + lambda2 * eye(Par.rank)) \ (U' * Y);
+    tempVT = OMG * VT + (1 - OMG) * tempVT;
+    VT = tempVT;
     % Fix V and update U
-    U = (Y * VT') / (VT * VT' + lambda * eye(Par.rank));
+    U = (Y * VT') / (VT * VT' + lambda1 * eye(Par.rank));
+    tempU = OMG * U + (1 - OMG) * tempU;
+    U = tempU;
     % energy function
-    DT = norm(Y - U * VT, 'fro') ^ 2;
+    DT = 0.5 * norm(Y - U * VT, 'fro') ^ 2;
     %     DT = DT(:)'*DT(:);
-    RT = norm(U, 'fro') ^ 2 + norm(VT, 'fro') ^ 2;
-    f_curr = 0.5 * DT + lambda * RT;
+    RT = lambda1 * norm(U, 'fro') ^ 2 + lambda2 * norm(VT, 'fro') ^ 2;
+    f_curr = DT + RT;
     fprintf('FNNM Energy, %d th: %2.8f\n', i, f_curr);
     if (abs(f_prev - f_curr) / f_curr < 0.001)
         break;

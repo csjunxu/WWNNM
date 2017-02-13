@@ -6,13 +6,11 @@ function [X ] = LRAppro( Y,sigma,M_Temp,c,k )
 
 %% initialization
 [row, col] = size(Y);
-[D, S, A] = svd(Y,'econ');
-D = D(:,1:k);
-AT = A';
-A = AT(1:k,:);
+D = randn(row,k);
 tempD = zeros(size(D));
+A = randn(k,col);
 tempA = zeros(size(A));
-maxiter = 50;
+maxiter = 6;
 OMG = 1.75;
 epsl = 1e-5;
 
@@ -27,17 +25,17 @@ lambda2 = lambda*row/k;
 for i = 1:maxiter
     A = (D'*D+lambda2*eye(k))\(D'*Y);
     tempA = OMG*A+(1-OMG)*tempA;
-    t1 = max(max(abs(tempA-A)));
+%     t1 = max(max(abs(tempA-A)));
     A = tempA;
     
     D = (Y*A')/(A*A'+lambda1*eye(k));
     tempD = OMG*D+(1-OMG)*tempD;
-    t2 = max(max(abs(tempD-D)));
+%     t2 = max(max(abs(tempD-D)));
     D = tempD;
-    if max(t1,t2)<epsl
-        i
-        break;
-    end
+%     if max(t1,t2)<epsl
+%         i
+%         break;
+%     end
 
 end
 

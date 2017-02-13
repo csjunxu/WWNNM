@@ -6,8 +6,8 @@ function X = FNNM( Y, NSig, m, Par )
 % warning('off');
 %% initialization
 [U, ~, ~] = svd(full(Y),'econ');
-U = U(:,1:Par.k);
-% V = V(1:Par.k,:);
+U = U(:,1:Par.rank);
+% V = V(1:Par.rank,:);
 epsl = 1e-6;
 
 seta = mean(mean(Y.^2,1));
@@ -19,16 +19,16 @@ for i = 1:Par.maxiter
     f_prev = f_curr;
     
     % Fix U and update V
-    VT = (U' * U + lambda * eye(Par.k)) \ (U' * Y);
+    VT = (U' * U + lambda * eye(Par.rank)) \ (U' * Y);
     % Fix V and update U
-    U = (Y * VT') / (VT * VT' + lambda * eye(Par.k));
+    U = (Y * VT') / (VT * VT' + lambda * eye(Par.rank));
     % energy function
     DT = norm(Y - U * VT, 'fro') ^ 2;
     %     DT = DT(:)'*DT(:);
     RT = norm(U, 'fro') ^ 2 + norm(VT, 'fro') ^ 2;
     f_curr = 0.5 * DT + lambda * RT;
     fprintf('FNNM Energy, %d th: %2.8f\n', i, f_curr);
-    if (abs(f_prev - f_curr) / f_curr < 0.01)
+    if (abs(f_prev - f_curr) / f_curr < 0.001)
         break;
     end
     

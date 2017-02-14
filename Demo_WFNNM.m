@@ -19,9 +19,9 @@ Par.step      =   floor((Par.patsize)/2-1);
 
 for delta = [0.1 0.08 0.06 0]
     Par.delta = delta;
-    for rank = [10]
+    for rank = [10 20]
         Par.rank = rank;
-        for lamada = 0.56:0.05:0.8
+        for lamada = 0.55:0.05:0.8
             Par.lamada = lamada;
             for lambdac = 0.8
                 Par.lambdac = lambdac;

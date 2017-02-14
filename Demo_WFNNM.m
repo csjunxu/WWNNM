@@ -5,7 +5,7 @@ im_dir  = dir(fpath);
 im_num = length(im_dir);
 
 nSig = 40;
-%                 Par   = ParSet(nSig);
+                Par   = ParSet(nSig);
 Par.nSig      =   nSig;                                 % Variance of the noise image
 Par.SearchWin =   30;                                   % Non-local patch searching window
 Par.delta     =   0.1;                                  % Parameter between each iter
@@ -72,7 +72,7 @@ for delta = [0.1 0.08 0.06 0]
                 sT256 = std(T256);
                 fprintf('The best PSNR result is at %d iteration. \n',idx);
                 fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-                name = sprintf(['FNNM_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_rank' num2str(rank) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
+                name = sprintf(['WFNNM_Sigma_1AG_nSig' num2str(nSig) '_delta' num2str(delta) '_rank' num2str(rank) '_lc' num2str(lambdac) '_ls' num2str(lamada) '.mat']);
                 save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
             end
         end

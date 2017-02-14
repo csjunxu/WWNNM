@@ -33,7 +33,7 @@ for i = 1:maxiter
     tempVT = OMG * VT + (1 - OMG) * tempVT;
     VT = tempVT;
     % Fix V and update U
-    U = (Y * W^2 * VT') / (VT * W^2 * VT' + lambda * eye(Par.rank));
+    U = (Y * diag(W.^2) * VT') / (VT * diag(W.^2) * VT' + lambda * eye(Par.rank));
     tempU = OMG * U + (1 - OMG) * tempU;
     U = tempU;
     % energy function

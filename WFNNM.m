@@ -14,8 +14,9 @@ maxiter = 6;
 OMG = 1.75;
 epsl = 1e-5;
 
-seta = mean(mean(Y.^2, 1));
-lambda = Par.lambdac * Par.c * NSig(1)^2 / sqrt(seta) + epsl;
+seta = mean(mean(Y.^2, 1)); % may be useless
+% lambda = Par.lambdac * Par.c * NSig^2 / sqrt(seta) + epsl; %originally
+lambda = Par.lambdac * Par.c / sqrt(seta) + epsl;
 W = 1 ./ NSig;
 % lambda1 = lambda * col / Par.rank;
 % lambda2 = lambda * row / Par.rank;

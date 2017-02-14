@@ -8,7 +8,7 @@ nSig = 40;
 %                 Par   = ParSet(nSig);
 Par.nSig      =   nSig;                                 % Variance of the noise image
 Par.SearchWin =   30;                                   % Non-local patch searching window
-Par.delta     =   0.1;                                  % Parameter between each iter
+Par.delta     =   0.1;                                   % Parameter between each iter
 Par.c         =   2*sqrt(2);                            % Constant num for the weight vector
 Par.Innerloop =   2;                                    % InnerLoop Num of between re-blockmatching
 

@@ -3,7 +3,7 @@ function X = WFNNM( Y, NSig, m, Par )
 %   Detailed explanation goes here
 %   The algorithm solves the following optimization problem
 %      1/2||Y-UV'||_F_2 + lambda/2(||U||_F_2 + ||V'||_F_2)
-% warning('off');
+warning('off');
 %% initialization
 [row, col] = size(Y);
 U = randn(row, Par.rank);

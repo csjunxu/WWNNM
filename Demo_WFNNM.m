@@ -5,7 +5,7 @@ im_dir  = dir(fpath);
 im_num = length(im_dir);
 
 nSig = 40;
-                Par   = ParSet(nSig);
+%                 Par   = ParSet(nSig);
 Par.nSig      =   nSig;                                 % Variance of the noise image
 Par.SearchWin =   30;                                   % Non-local patch searching window
 Par.delta     =   0.1;                                  % Parameter between each iter

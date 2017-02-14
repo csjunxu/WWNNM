@@ -37,7 +37,7 @@ for i = 1:maxiter
     tempU = OMG * U + (1 - OMG) * tempU;
     U = tempU;
     % energy function
-    DT = norm((Y - U * VT) * W, 'fro') ^ 2;
+    DT = norm((Y - U * VT) * diag(W), 'fro') ^ 2;
     %     DT = DT(:)'*DT(:);
     RT = lambda * norm(U, 'fro') ^ 2 + lambda * norm(VT, 'fro') ^ 2;
     f_curr = 0.5 * (DT + RT);

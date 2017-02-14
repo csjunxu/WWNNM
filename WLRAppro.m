@@ -1,4 +1,4 @@
-function [X ] = WLRAppro( Y,sigma,c,k )
+function [X ] = WLRAppro( Y, sigma, M_Temp, c, k )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %   The algorithm solves the following optimization problem
@@ -38,7 +38,7 @@ end
 
 %% result
 X = D*A;
-    
+X=X+M_Temp; 
 end
 
 

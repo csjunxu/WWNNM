@@ -21,9 +21,9 @@ for delta = [0.1 0.08 0.06 0]
     Par.delta = delta;
     for rank = [10 20 floor(Par.patsize ^ 2 / 2) Par.patsize^2]
         Par.rank = rank;
-        for lamada = 0.55:0.05:0.8
+        for lamada = 0.56:0.05:0.8
             Par.lamada = lamada;
-            for lambdac = 0.9:-0.1:0.5
+            for lambdac = 0.8
                 Par.lambdac = lambdac;
                 % record all the results in each iteration
                 Par.PSNR = zeros(Par.Iter, im_num, 'single');

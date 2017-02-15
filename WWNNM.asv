@@ -1,17 +1,16 @@
 %
 function  [X] =  WWNNM( Y, C, NSig, m, Par )
 
-% initialize X as Y or ?
-X = Y;
+Y
+
 for i = 1:Par.ReWeiIter
-    Ystar = X + 1/Par.mu * (Y - X) * diag(NSig).^2;
-    [U, SigmaY, V] =   svd(full(Ystar), 'econ');
-    PatNum        = size(Y,2);
-    TempC  = 2/Par.mu * C * sqrt(PatNum) * 2 * NSig(1)^2;
+    [U,SigmaY,V] =   svd(full(Y), 'econ');
+    PatNum       = size(Y,2);
+    TempC  = C*sqrt(PatNum)*2*NSig^2;
     [SigmaX, svp] = ClosedWNNM(SigmaY, TempC, eps);
-    X =  U(:,1:svp) * diag(SigmaX) * V(:,1:svp)';
+    X =  U(:,1:svp)*diag(SigmaX)*V(:,1:svp)' + m;
 end
-    X =  X + m;
+
 return;
 
 % function  [X]  =  WWNNM( Y, C, NSig, m, Iter )

@@ -5,6 +5,9 @@
 %
 % Shuhang Gu, Lei Zhang, Wangmeng Zuo, Xiangchu Feng 
 % "Weighted Nuclear Norm Minimization with Application to Image Denoising," In Proc. CVPR 2014.
+% Shuhang Gu, Qi Xie, Deyu Meng, Wangmeng Zuo, Xiangchu Feng, Lei Zhang 
+% "Weighted Nuclear Norm Minimization and Its Applications to Low Level Vision," preprint, 2015.
+
 % 
 % ----------------------------------------------------------------------
 % Permission to use, copy, or modify this software and its documentation

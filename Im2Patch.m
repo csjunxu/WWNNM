@@ -1,4 +1,4 @@
-function  [Y, SigmaArr]  =  Im2Patch( E_Img,N_Img, par )
+function  [Y SigmaArr]  =  Im2Patch( E_Img,N_Img, par )
 TotalPatNum = (size(E_Img,1)-par.patsize+1)*(size(E_Img,2)-par.patsize+1);                  %Total Patch Number in the image
 Y           =   zeros(par.patsize*par.patsize, TotalPatNum, 'single');                      %Current Patches
 N_Y         =   zeros(par.patsize*par.patsize, TotalPatNum, 'single');                      %Patches in the original noisy image

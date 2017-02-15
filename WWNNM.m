@@ -5,9 +5,9 @@ function  [X] =  WWNNM( Y, C, NSig, m, Par )
 X = Y;
 for i = 1:Par.ReWeiIter
     Ystar = X + 1/Par.mu * (Y - X) * diag(NSig).^2;
-    [U, SigmaY, V] =   svd(full(Ystar), 'econ');
+    [U, SigmaY, V] =   svd(full(Ystar), 'econ'); % Ystar
     PatNum        = size(Y,2);
-    TempC  = 2/Par.mu * C * sqrt(PatNum) * 2 * NSig(1)^2;
+    TempC  = C * sqrt(PatNum) * 2 * NSig(1)^2; % 2/Par.mu * 
     [SigmaX, svp] = ClosedWNNM(SigmaY, TempC, eps);
     X =  U(:,1:svp) * diag(SigmaX) * V(:,1:svp)';
 end

@@ -1,4 +1,4 @@
-function  [Neighbor_arr, Num_arr, SelfIndex_arr]  =  NeighborIndex(im, par)
+function  [Neighbor_arr Num_arr SelfIndex_arr]  =  NeighborIndex(im, par)
 % This Function Precompute the all the patch indexes in the Searching window
 % -Neighbor_arr is the array of neighbor patch indexes for each keypatch
 % -Num_arr is array of the effective neighbor patch numbers for each keypatch
@@ -17,7 +17,7 @@ Idx         =   reshape(Idx, TempR, TempC);
 R_GridH     =   length(R_GridIdx);    
 C_GridW     =   length(C_GridIdx); 
 
-Neighbor_arr    =   int32(zeros(4*SW*SW,R_GridH*C_GridW)); % 每一列中存储着参考块的搜索窗中图像块的index，总共有R_GridH*C_GridW个参考块要处理
+Neighbor_arr    =   int32(zeros(4*SW*SW,R_GridH*C_GridW));
 Num_arr         =   int32(zeros(1,R_GridH*C_GridW));
 SelfIndex_arr   =   int32(zeros(1,R_GridH*C_GridW));
 
@@ -37,7 +37,7 @@ for  i  =  1 : R_GridH
         NL_Idx     =   NL_Idx(:);
 
         Num_arr(Offset2)  =  length(NL_Idx);
-        Neighbor_arr(1:Num_arr(Offset2),Offset2)  =  NL_Idx;   % 每一列存储的是搜索窗中块在原始图像中的一维下标
-        SelfIndex_arr(Offset2) = Offset1;% 要处理的参考块在原始图像中的一维坐标为offset1，
+        Neighbor_arr(1:Num_arr(Offset2),Offset2)  =  NL_Idx;   
+        SelfIndex_arr(Offset2) = Offset1;
     end
 end

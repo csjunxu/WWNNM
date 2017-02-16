@@ -21,15 +21,14 @@ Par.Innerloop =   2;                                    % InnerLoop Num of betwe
 Par.step      =   floor((Par.ps)/2);
 Par.display = true;
 
+Par.method = 'WNNM';
+Par.maxIter = 10;
 Par.rho = 1.1;
-Par.method = 'WWNNM';
-Par.ReWeiIter =   3;
-Par.maxIter = Par.ReWeiIter;
 for nSig = 0.1:0.05:0.25
     Par.nSig = nSig;
     for lamada = 0.56
         Par.lamada = lamada;
-        for mu = [1]
+        for mu = 0.8:0.1:1
             Par.mu = mu;
             PSNR = [];
             SSIM = [];
@@ -77,7 +76,7 @@ for nSig = 0.1:0.05:0.25
             mSSIM=mean(SSIM,2);
             fprintf('The best PSNR result is at %d iteration. \n',idx);
             fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-            name = sprintf([Par.method '_ALM_Sigma_1AR_nSig' num2str(nSig) '_lamada' num2str(lamada) '_mu' num2str(mu) '.mat']);
+            name = sprintf([Par.method '_ALM_Sigma_1AR_nSig' num2str(nSig) '_lamada' num2str(lamada) '_mu' num2str(mu) '_Iter' num2str(Par.maxIter) '.mat']);
             save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM');
         end
     end

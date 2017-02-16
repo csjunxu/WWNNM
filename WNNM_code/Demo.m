@@ -1,7 +1,7 @@
   
 
-    nSig  = 100;
-    O_Img = double(imread('Monarch.png'));
+    nSig  = 40;
+    O_Img = double(imread('airfield.png'));
 
     randn('seed', 0);
     N_Img = O_Img + nSig* randn(size(O_Img));                                   %Generate noisy image

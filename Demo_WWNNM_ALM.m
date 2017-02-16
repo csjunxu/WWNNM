@@ -8,11 +8,12 @@ nSig = 40;
 
 [Par] = ParSet(nSig);
 Par.display = true;
+Par.method = 'WNNM';
 Par.maxIter = 10;
 Par.rho = 1.1;
 for lamada = 0.56
     Par.lamada = lamada;
-    for mu = [1e-3 1e-1 1]
+    for mu = 0.6:0.1:0.9
         Par.mu = mu;
         % record all the results in each iteration
         Par.PSNR = zeros(Par.Iter, im_num, 'single');
@@ -33,7 +34,7 @@ for lamada = 0.56
             fprintf('The initial value of PSNR = %2.4f, SSIM = %2.4f \n', PSNR,SSIM);
             %
             time0 = clock;
-            im_out = WWNNM_ALM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
+            im_out = WWNNM_ALM_1AG( Par.nim, Par.I, Par ); % WNNM denoisng function
             if size(Par.I,1) == 512
                 T512 = [T512 etime(clock,time0)];
                 fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );

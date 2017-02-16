@@ -8,6 +8,8 @@ nSig = 40;
 
 [Par] = ParSet(nSig);
 Par.display = true;
+Par.maxIter = 1e2;
+Par.rho = 1.1;
 for lamada = 0.56
     Par.lamada = lamada;
     for mu = [1e-6 1e-3 1e-1 1]

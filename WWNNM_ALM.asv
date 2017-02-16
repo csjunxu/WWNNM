@@ -13,6 +13,9 @@ tol = 1e-8;
 maxIter = 1e2;
 rho = 1.1;
 max_mu = 1e10;
+if ~isfield(Par, 'display')
+    Par.display = true;
+end
 if ~isfield(Par, 'mu')
     Par.mu = 1e-6;
 end
@@ -35,7 +38,7 @@ while iter < maxIter
     [SigmaZ, svp] = ClosedWNNM(diag(SigmaTemp), TempC, eps);
     Z =  U(:, 1:svp) * diag(SigmaZ) * V(:, 1:svp)';
     % update X, fix Z and A
-    X = (2 * Y * diag(W) + Par.mu * Z - A) * diag(1 ./ (W.^2 + Par.mu));
+    X = (Y * diag(W) + 0.Par.mu * Z - 0.5 * A) * diag(1 ./ (W.^2 + Par.mu));
     % check the convergence conditions
     stopC = max(max(abs(X - Z)));
     if Par.display && (iter==1 || mod(iter,10)==0 || stopC<tol)

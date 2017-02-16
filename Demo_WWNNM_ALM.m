@@ -62,7 +62,7 @@ for lamada = 0.56
         sT256 = std(T256);
         fprintf('The best PSNR result is at %d iteration. \n',idx);
         fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-        name = sprintf(['WWNNM_ALM_Sigma_1AG_nSig' num2str(nSig) '_mu' num2str(mu) '_ls' num2str(lamada) '.mat']);
+        name = sprintf([Par.method '_ALM_Sigma_1AG_nSig' num2str(nSig) '_mu' num2str(mu) '_ls' num2str(lamada) '.mat']);
         save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
     end
 end

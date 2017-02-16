@@ -1,0 +1,36 @@
+
+function  [X] =  WWNNM_ALM( Y, C, NSig, m, Par)
+% This routine solves the following weighted nuclear norm optimization problem with column weights,
+% which is more general than "lrr.m"
+% min |Z|_*,P + |Y-XW|_2,1
+% s.t., X = Z
+% inputs:
+%        Y -- D*N data matrix, D is the data dimension, and N is the number
+%             of image patches.
+%        W -- N*N matrix of column weights
+
+max_mu = 1e10;
+mu = 1e-6;
+%% Initializing optimization variables
+% intialize
+W = diag(1 ./ NSig);
+X = zeros(size(Y));
+Z = zeros(size(Y));
+A = zeros(size(Y));
+%% Start main loop
+iter = 0;
+PatNum       = size(Y,2);
+TempC  = C * sqrt(PatNum) * 2 * NSig(1)^2;
+while iter<Par.maxIter
+    iter = iter + 1;
+    % update Z, fix X and A
+    temp = X + A/mu;
+    [U, Sigmatemp, V] =   svd(full(temp), 'econ');
+    [SigmaZ, svp] = ClosedWNNM(diag(Sigmatemp), TempC, eps);
+    Z =  U(:,1:svp) * diag(SigmaZ) * V(:,1:svp)';
+    % update X, fix Z and A
+    X = (2 * Y * W + mu * Z - A) * 1 ./ diag(1 ./ NSig)
+    
+end
+X =  X + m;
+return;

@@ -9,7 +9,7 @@ for  i      =  1 : length(Self_arr)                                 % For each k
     
     %     E_Temp 	=   WWNNM( Temp, Sigma_arr(NL_mat(1:Par.patnum,i)), M_Temp, Par); % WWNNM Estimation
     %     E_Temp 	=   WLRAppro( Temp, Sigma_arr(NL_mat(1:Par.patnum,i)), M_Temp, Par.c, Par.rank );
-    E_Temp 	=   WALMWNNM( Temp, Sigma_arr(Self_arr(i)), M_Temp, Par );
+    E_Temp 	=   WWNNM_ALM( Temp, Sigma_arr(Self_arr(i)), M_Temp, Par );
     EPat(:,NL_mat(1:Par.patnum,i))  = EPat(:,NL_mat(1:Par.patnum,i))+E_Temp;
     W(:,NL_mat(1:Par.patnum,i))     = W(:,NL_mat(1:Par.patnum,i))+ones(Par.patsize*Par.patsize,size(NL_mat(1:Par.patnum,i),1));
 end

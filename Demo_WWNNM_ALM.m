@@ -6,38 +6,11 @@ im_num = length(im_dir);
 
 nSig = 40;
 
-Par.nSig      =   nSig;                                 % Variance of the noise image
-Par.SearchWin =   30;                                   % Non-local patch searching window
-Par.delta     =   0.1;                                  % Parameter between each iter
-Par.c         =   2*sqrt(2);                            % Constant num for the weight vector
-Par.Innerloop =   2;                                    % InnerLoop Num of between re-blockmatching
-Par.ReWeiIter =   3;
-if nSig<=20
-    Par.patsize       =   6;                            % Patch size
-    Par.patnum        =   70;                           % Initial Non-local Patch number
-    Par.Iter          =   8;                            % total iter numbers
-    Par.lamada        =   0.54;                         % Noise estimete parameter
-elseif nSig <= 40
-    Par.patsize       =   7;
-    Par.patnum        =   90;
-    Par.Iter          =   12;
-    Par.lamada        =   0.56;
-elseif nSig<=60
-    Par.patsize       =   8;
-    Par.patnum        =   120;
-    Par.Iter          =   14;
-    Par.lamada        =   0.58;
-else
-    Par.patsize       =   9;
-    Par.patnum        =   140;
-    Par.Iter          =   14;
-    Par.lamada        =   0.58;
-end
-Par.step      =   floor((Par.patsize)/2-1);
+[Par] = ParSet(nSig);
 
 for lamada = 0.56
     Par.lamada = lamada;
-    for mu = [2 2.05 1.95]
+    for mu = [1e-6 1e-3 1e-1 1]
         Par.mu = mu;
         % record all the results in each iteration
         Par.PSNR = zeros(Par.Iter, im_num, 'single');
@@ -86,7 +59,7 @@ for lamada = 0.56
         sT256 = std(T256);
         fprintf('The best PSNR result is at %d iteration. \n',idx);
         fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-        name = sprintf(['WNNM_Sigma_1AG_nSig' num2str(nSig) '_mu' num2str(mu) '_ls' num2str(lamada) '.mat']);
+        name = sprintf(['WWNNM_ALM_Sigma_1AG_nSig' num2str(nSig) '_mu' num2str(mu) '_ls' num2str(lamada) '.mat']);
         save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
     end
 end

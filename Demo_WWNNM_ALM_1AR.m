@@ -21,12 +21,12 @@ Par.Innerloop =   2;                                    % InnerLoop Num of betwe
 Par.step      =   floor((Par.ps)/2);
 Par.display = true;
 
-Par.method = 'WNNM';
+Par.method = 'WWNNM';
 Par.maxIter = 10;
 Par.rho = 1.1;
-for nSig = 0.1:0.05:0.25
+for nSig = 5:2:15
     Par.nSig = nSig;
-    for lamada = 0.56
+    for lamada = 0.7:0.1:1
         Par.lamada = lamada;
         for mu = 0.8:0.1:1
             Par.mu = mu;

@@ -27,7 +27,7 @@ end
 if strcmp(Par.method, 'WNNM') ==1
     W = ones(1, length(NSig));
 else
-    W = 1 ./ NSig;
+    W = NSig(1) ./ NSig;
 end
 X = zeros(size(Y));
 Z = zeros(size(Y));

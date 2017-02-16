@@ -1,5 +1,5 @@
 
-function  [X] =  WNNM( Y, C, NSig, m, Iter )
+function  [X] =  WALMWNNM( Y, C, NSig, m, Par)
     [U,SigmaY,V] =   svd(full(Y),'econ');    
     PatNum       = size(Y,2);
     TempC  = C*sqrt(PatNum)*2*NSig^2;

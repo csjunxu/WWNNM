@@ -58,7 +58,7 @@ for lamada = 0.56
             fprintf('The initial value of PSNR = %2.4f, SSIM = %2.4f \n', PSNR,SSIM);
             %
             time0 = clock;
-            im_out = WWNNM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
+            im_out = WWNNM_ALM_DeNoising( Par.nim, Par.I, Par );                                %WNNM denoisng function
             if size(Par.I,1) == 512
                 T512 = [T512 etime(clock,time0)];
                 fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );

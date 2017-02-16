@@ -13,7 +13,7 @@ Par.maxIter = 10;
 Par.rho = 1.1;
 for lamada = 0.56
     Par.lamada = lamada;
-    for mu = 0.6:0.1:0.9
+    for mu = 0.7:0.1:0.9
         Par.mu = mu;
         % record all the results in each iteration
         Par.PSNR = zeros(Par.Iter, im_num, 'single');
@@ -42,7 +42,7 @@ for lamada = 0.56
                 T256 = [T256 etime(clock,time0)];
                 fprintf('Total elapsed time = %f s\n', (etime(clock,time0)) );
             end
-            im_out(im_out>1)=1;
+            im_out(im_out>255)=255;
             im_out(im_out<0)=0;
             % calculate the PSNR
             Par.PSNR(Par.Iter, Par.image)  =   csnr( im_out, Par.I, 0, 0 );

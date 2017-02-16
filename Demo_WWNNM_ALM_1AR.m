@@ -25,9 +25,9 @@ Par.maxIter = 10;
 Par.rho = 1.1;
 for nSig = 0.1:0.05:0.15
     Par.nSig = nSig;
-    for lamada = 0.5:0.1:0.7
+    for lamada = 0.3:0.1:0.7
         Par.lamada = lamada;
-        for mu = [0.5 1]
+        for mu = [0.1 0.5 1]
             Par.mu = mu;
             PSNR = [];
             SSIM = [];
@@ -56,7 +56,7 @@ for nSig = 0.1:0.05:0.15
                 [IMout, Par] = WWNNM_ALM_1AR( IMin, IM_GT, Par );                                %WNNM denoisng function
                 t2=clock;
                 etime(t2,t1)
-                alltime(Par.imIndex)  = etime(t2, t1);
+                alltime(Par.image)  = etime(t2, t1);
                 IMout(IMout>1)=1;
                 IMout(IMout<0)=0;
                 % calculate the PSNR

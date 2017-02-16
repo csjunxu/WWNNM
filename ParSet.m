@@ -27,7 +27,7 @@ else
     par.Iter          =   14;
     par.lamada        =   0.58; 
 end
-par.step      =   floor((par.ps)/2);       
+par.step      =   floor((par.ps) - 2);       
 % par.step      =   floor((par.patsize)/2-1);                   
 % Blockmatching and perform WNNM algorithm on all the patches in the image
 % is time consuming, we just perform the blockmatching and WNNM on parts of

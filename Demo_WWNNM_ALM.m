@@ -8,11 +8,11 @@ nSig = 40;
 
 [Par] = ParSet(nSig);
 Par.display = true;
-Par.maxIter = 1e2;
+Par.maxIter = 10;
 Par.rho = 1.1;
 for lamada = 0.56
     Par.lamada = lamada;
-    for mu = [1e-6 1e-3 1e-1 1]
+    for mu = [1e-3 1e-1 1]
         Par.mu = mu;
         % record all the results in each iteration
         Par.PSNR = zeros(Par.Iter, im_num, 'single');

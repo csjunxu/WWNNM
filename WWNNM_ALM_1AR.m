@@ -23,8 +23,8 @@ for iter = 1 : Par.Iter
     
     [Y_hat, W_hat]  =  WALMPatEstimation( NL_mat, Sigma_arr, CurPat, Par );   % Estimate all the patches
     E_Img = PGs2Image(Y_hat, W_hat, Par);
-    PSNR  = csnr( O_Img, E_Img, 0, 0 );
-    SSIM      =  cal_ssim( O_Img, E_Img, 0, 0 );
+    PSNR  = csnr( O_Img * 255, E_Img * 255, 0, 0 );
+    SSIM      =  cal_ssim( O_Img * 255, E_Img * 255, 0, 0 );
     fprintf( 'Iter = %2.3f, PSNR = %2.2f, SSIM = %2.2f \n', iter, PSNR, SSIM );
     Par.PSNR(iter, Par.image)  =   PSNR;
     Par.SSIM(iter, Par.image)      =  SSIM;

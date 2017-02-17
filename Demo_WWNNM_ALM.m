@@ -7,6 +7,7 @@ im_num = length(im_dir);
 nSig = 40;
 
 [Par] = ParSet(nSig);
+par.step      =   floor((par.ps) - 1);    
 Par.display = true;
 Par.method = 'WNNM';
 Par.maxIter = 10;

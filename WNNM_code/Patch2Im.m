@@ -4,8 +4,8 @@ TempC        =   ImageW-PatSize+1;
 TempOffsetR  =   [1:TempR];
 TempOffsetC  =   [1:TempC];
 
-E_Img  	=  zeros(ImageH,ImageW);
-W_Img 	=  zeros(ImageH,ImageW);
+E_Img  	=  zeros(ImageH, ImageW, Ch);
+W_Img 	=  zeros(ImageH, ImageW, Ch);
 k        =   0;
 for c = 1:Ch
     for i  = 1:PatSize

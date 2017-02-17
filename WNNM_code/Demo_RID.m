@@ -11,7 +11,7 @@ GT_im_dir  = dir(GT_fpath);
 TT_im_dir  = dir(TT_fpath);
 im_num = length(TT_im_dir);
 
-for nSig  = 10:5:50
+for nSig  = [16 17 18 19 21 22 23]
     
     PSNR = [];
     SSIM = [];
@@ -36,3 +36,4 @@ for nSig  = 10:5:50
     name = sprintf(['WNNM_RID_ImNum' num2str(im_num) '_nSig' num2str(nSig) '.mat']);
     save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM');
 end
+

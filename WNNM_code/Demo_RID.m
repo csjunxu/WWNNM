@@ -29,6 +29,6 @@ for nSig  = 5:2:15
     mPSNR=mean(PSNR);
     mSSIM=mean(SSIM);
     fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR,mSSIM);
-    name = sprintf(['WNNM_RID_nSig' num2str(nSig) '.mat']);
+    name = sprintf(['WNNM_RID_ImNum' num2str(im_num) '_nSig' num2str(nSig) '.mat']);
     save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM');
 end

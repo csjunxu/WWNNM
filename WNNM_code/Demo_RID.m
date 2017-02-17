@@ -11,7 +11,7 @@ GT_im_dir  = dir(GT_fpath);
 TT_im_dir  = dir(TT_fpath);
 im_num = length(TT_im_dir);
 
-for nSig  = 5:2:15
+for nSig  = 10:5:50
     
     PSNR = [];
     SSIM = [];

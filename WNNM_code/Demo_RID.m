@@ -21,6 +21,10 @@ for nSig  = 5:2:15
         fprintf( 'Noisy Image: nSig = %2.3f, PSNR = %2.2f \n\n\n', nSig, csnr( N_Img, O_Img, 0, 0 ) );
         
         Par   = ParSet(nSig);
+        Par.patsize       =   6;                            % Patch size
+        Par.SearchWin =   20;
+        Par.Iter          =   4;                            % total iter numbers
+        Par.step = floor((Par.patsize) - 1);
         E_Img = WNNM_DeNoising( N_Img, O_Img, Par );                                %WNNM denoisng function
         PSNR = [PSNR csnr( O_Img, E_Img, 0, 0 )];
         SSIM  = [SSIM cal_ssim( O_Img, E_Img, 0, 0 )];

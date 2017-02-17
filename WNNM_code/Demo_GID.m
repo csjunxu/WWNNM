@@ -25,4 +25,4 @@ mPSNR=mean(PSNR);
 mSSIM=mean(SSIM);
 fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR,mSSIM);
 name = sprintf(['WNNM_nSig' num2str(nSig) '.mat']);
-save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM','mT512','sT512','mT256','sT256');
+save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM');

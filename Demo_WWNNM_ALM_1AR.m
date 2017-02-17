@@ -12,7 +12,7 @@ TT_im_dir  = dir(TT_fpath);
 im_num = length(TT_im_dir);
 
 Par.ps       =   6;                            % Patch size
-Par.Iter          =   6;                            % total iter numbers
+Par.Iter          =   4;                            % total iter numbers
 Par.win =   20;                                   % Non-local patch searching window
 Par.delta     =   0.1;                                  % Parameter between each iter
 Par.Constant         =   2 * sqrt(2);                              % Constant num for the weight vector
@@ -27,7 +27,7 @@ for nSig = 0.1:0.05:0.15
     Par.nSig = nSig;
     for lamada = 0.3:0.1:0.7
         Par.lamada = lamada;
-        for mu = [0.45 0.4 0.55]
+        for mu = [0.45 0.5 0.55 0.6]
             Par.mu = mu;
             PSNR = [];
             SSIM = [];

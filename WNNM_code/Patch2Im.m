@@ -11,8 +11,8 @@ for c = 1:Ch
     for i  = 1:PatSize
         for j  = 1:PatSize
             k    =  k+1;
-            E_Img(TempOffsetR-1+i, TempOffsetC-1+j, c)  =  E_Img(TempOffsetR-1+i,TempOffsetC-1+j) + reshape( ImPat(k,:)', [TempR TempC]);
-            W_Img(TempOffsetR-1+i, TempOffsetC-1+j, c)  =  W_Img(TempOffsetR-1+i,TempOffsetC-1+j) + reshape( WPat(k,:)',  [TempR TempC]);
+            E_Img(TempOffsetR-1+i, TempOffsetC-1+j, c)  =  E_Img(TempOffsetR-1+i,TempOffsetC-1+j, c) + reshape( ImPat(k,:)', [TempR TempC]);
+            W_Img(TempOffsetR-1+i, TempOffsetC-1+j, c)  =  W_Img(TempOffsetR-1+i,TempOffsetC-1+j, c) + reshape( WPat(k,:)',  [TempR TempC]);
         end
     end
 end

@@ -1,4 +1,4 @@
-function  [Neighbor_arr Num_arr SelfIndex_arr]  =  NeighborIndex(im, par)
+function  [Neighbor_arr, Num_arr, SelfIndex_arr]  =  NeighborIndex(im, par)
 % This Function Precompute the all the patch indexes in the Searching window
 % -Neighbor_arr is the array of neighbor patch indexes for each keypatch
 % -Num_arr is array of the effective neighbor patch numbers for each keypatch

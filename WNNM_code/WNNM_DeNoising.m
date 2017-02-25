@@ -29,8 +29,8 @@ for iter = 1 : Par.Iter
     
     [EPat, W]  =  PatEstimation( NL_mat, Self_arr, Sigma_arr, CurPat, Par );   % Estimate all the patches
     E_Img      =  Patch2Im( EPat, W, Par.patsize, Height, Width, Ch );
-    PSNR  = csnr( O_Img * 255, E_Img * 255, 0, 0 );
-    SSIM      =  cal_ssim( O_Img * 255, E_Img * 255, 0, 0 );
+    PSNR  = csnr( O_Img, E_Img, 0, 0 );
+    SSIM      =  cal_ssim( O_Img, E_Img, 0, 0 );
     fprintf( 'Iter = %2.3f, PSNR = %2.2f, SSIM = %2.2f \n', iter, PSNR, SSIM );
 end
 return;

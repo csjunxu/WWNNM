@@ -7,7 +7,7 @@ im_num = length(im_dir);
 nSig = 50;
 
 [Par] = ParSet(nSig);
-Par.step      =   floor((Par.ps) - 1);
+Par.step      =   floor((Par.ps) - 1);    
 Par.display = true;
 Par.method = 'WNNM';
 Par.maxIter = 10;
@@ -26,11 +26,9 @@ for lamada = 0.56
             Par.nSig0 = nSig;
             Par.I =  double( imread(fullfile(Original_image_dir, im_dir(i).name)) );
             S = regexp(im_dir(i).name, '\.', 'split');
-            [h, w, ch] = size(Par.I);
-            for c = 1:ch
-                randn('seed',0);
-                Par.nim(:, :, c) = Par.I(:, :, c) + Par.nSig0 * randn(size(Par.I(:, :, c)));
-            end
+            
+            randn('seed',0);
+            Par.nim =   Par.I + Par.nSig0*randn(size(Par.I()));
             %
             fprintf('%s :\n',im_dir(i).name);
             PSNR =   csnr( Par.nim, Par.I, 0, 0 );

@@ -15,7 +15,6 @@ for iter = 1 : Par.Iter
     CurPat =	Image2PatchNew( E_Img, Par );
     % estimate local noise variance
     Sigma_arr = Par.lamada*sqrt(abs(repmat(Par.nSig^2, 1, size(CurPat, 2)) - mean((NoiPat - CurPat).^2)));
-    
     if (mod(iter-1, Par.Innerloop) == 0)
         Par.nlsp = Par.nlsp - 10;                                             % Lower Noise level, less NL patches
         NL_mat  =  Block_Matching(CurPat, Par);% Caculate Non-local similar patches for each
